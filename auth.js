@@ -27,7 +27,7 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
         }
 
         // Step 4: Supabase Check (Sabse zyada error yahan aate hain)
-        if (typeof supabase === 'undefined') {
+        if (typeof supabaseClient === 'undefined') {
             alert("Error: Supabase file link nahi hui! index.html mein scripts ka order check karein ya Internet connection dekhein.");
             return;
         }
@@ -35,7 +35,7 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
         // Step 5: Database mein bhejna
         alert("Conditions pass ho gayi! Data Supabase ko bhej rahe hain..."); // Ye dikhna chahiye
         
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
             options: {
@@ -70,12 +70,12 @@ document.querySelector('#signin-modal form').addEventListener('submit', async fu
         const email = inputs[0].value; 
         const password = inputs[1].value;
 
-        if (typeof supabase === 'undefined') {
+        if (typeof supabaseClient === 'undefined') {
             alert("Error: Supabase load nahi hua hai.");
             return;
         }
 
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
