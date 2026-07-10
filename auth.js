@@ -12,10 +12,10 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
     const password = inputs[3].value;
 
     // --- CONDITION 1: USERNAME ---
-    // Rule: Kam se kam 5 letters aur SIRF CAPITAL LETTERS
+    // Rule: Only 5 CAPITAL LETTERS
     const usernameRegex = /^[A-Z]{5,}$/;
     if (!usernameRegex.test(username)) {
-        alert("Username galat hai! Ye kam se kam 5 letters ka hona chahiye aur isme SIRF CAPITAL LETTERS (A-Z) hone chahiye.");
+        alert("ONLY 5 CAPITAL LETTER (A-Z)");
         return; // Pura code yahi ruk jayega
     }
 
@@ -23,7 +23,7 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
     // Rule: Exact 6 characters aur Alphanumeric (kam se kam ek letter aur ek number)
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6}$/;
     if (!passwordRegex.test(password)) {
-        alert("Password galat hai! Password sirf 6 characters ka hona chahiye aur usme letters aur numbers dono hone zaroori hain (Alphanumeric).");
+        alert("ONLY 6 LETTER / ALPHABET + NUMBER");
         return;
     }
 
@@ -42,7 +42,7 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
     if (error) {
         alert("Error: " + error.message);
     } else {
-        alert("Bhaiya, account ban gaya! OMNIX mein swagat hai.");
+        alert("Account Created");
         document.getElementById('signup-modal').style.display = 'none';
         this.reset(); // Form clear karne ke liye
     }
@@ -62,9 +62,9 @@ document.querySelector('#signin-modal form').addEventListener('submit', async fu
     });
 
     if (error) {
-        alert("Login fail ho gaya: " + error.message);
+        alert("Login failed : " + error.message);
     } else {
-        alert("Login successful! Welcome back.");
+        alert("Login successful! Welcome to Omnix.");
         document.getElementById('signin-modal').style.display = 'none';
         this.reset(); // Form clear karne ke liye
     }
