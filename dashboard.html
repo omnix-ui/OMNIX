@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMNIX Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="hamburger" id="menu-btn">&#9776;</span>
+            <div class="logo">OMNIX</div>
+        </div>
+        <div class="nav-links">
+            <button id="logout-btn" class="action-btn btn-signin">Log Out</button>
+        </div>
+    </nav>
+
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>My Profile</h3>
+            <span class="close-sidebar" id="close-btn">&times;</span>
+        </div>
+        <div class="profile-info">
+            <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+            <p><strong>Username:</strong> <span id="profile-username">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="profile-email">Loading...</span></p>
+        </div>
+    </div>
+    
+    <div id="sidebar-overlay" class="overlay"></div>
+  <main class="hero">
+        <p class="welcome-text">W E L C O M E</p>
+        <h1 class="main-title" id="welcome-name" style="font-size: 2rem;"
+            >User</h1> 
+    </main>
+    <footer class="footer">
+        <div class="footer-features">
+            <span>Free forever</span> &bull; 
+            <span>No ads</span> &bull; 
+            <span>Secure</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 OMNIX . All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js?v=999"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
