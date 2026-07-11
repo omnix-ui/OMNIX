@@ -1,5 +1,4 @@
 // auth.js - Asli Login aur Signup ka logic
-
 // 1. Sign Up Logic
 document.querySelector('#signup-modal form').addEventListener('submit', async function(e) {
     e.preventDefault(); // Page refresh hone se rokna
@@ -44,7 +43,9 @@ document.querySelector('#signup-modal form').addEventListener('submit', async fu
     } else {
         alert("Account Created");
         document.getElementById('signup-modal').style.display = 'none';
-        this.reset(); // Form clear karne ke liye
+        this.reset();
+        window.location.href = "dashboard.html";
+        // Form clear karne ke liye
     }
 });
 
@@ -53,9 +54,8 @@ document.querySelector('#signin-modal form').addEventListener('submit', async fu
     e.preventDefault(); 
     
     const inputs = this.querySelectorAll('input');
-    const email = inputs[0].value; 
+    const email = inputs[0].value;
     const password = inputs[1].value;
-
     const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: email,
         password: password
@@ -66,6 +66,8 @@ document.querySelector('#signin-modal form').addEventListener('submit', async fu
     } else {
         alert("Login successful! Welcome to Omnix.");
         document.getElementById('signin-modal').style.display = 'none';
-        this.reset(); // Form clear karne ke liye
+        this.reset(); 
+        window.location.href = "dashboard.html";
+        // Form clear karne ke liye
     }
 });
