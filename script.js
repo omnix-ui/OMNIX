@@ -32,3 +32,38 @@ window.addEventListener('click', function(event) {
         event.target.style.display = 'none';
     }
 });
+// Pre-loader ko hatane ka logic (1.5 seconds baad)
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0'; // Pehle fade out hoga
+        
+        setTimeout(function() {
+            preloader.style.display = 'none'; // Phir poori tarah hat jayega
+        }, 500); 
+    }, 1500); // 1500 milliseconds = 1.5 seconds
+});
+// --- DARK/LIGHT MODE LOGIC ---
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Pehle check karo ki user ne aakhiri baar kya set kiya tha
+if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+    themeToggleBtn.innerText = '🌙'; // Light mode hai toh Moon dikhao
+}
+
+// 2. Button click hone par kya hoga
+themeToggleBtn.addEventListener('click', () => {
+    // Light mode class lagao ya hatao
+    body.classList.toggle('light-mode');
+    
+    // Icon change karo aur memory (localStorage) mein save karo
+    if (body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.innerText = '🌙'; 
+    } else {
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.innerText = '☀️'; 
+    }
+});
