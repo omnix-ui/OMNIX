@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('profile-name').innerText = fullName;
     document.getElementById('profile-username').innerText = username;
     document.getElementById('profile-email').innerText = email;
-
+   const avatarUrl = `https://ui-avatars.com/api/?name=${fullName}&background=random&color=fff&size=128&bold=true`;
+    document.getElementById('profile-avatar').src = avatarUrl;
     // 3. Sidebar (Hamburger Menu) ka logic
     const menuBtn = document.getElementById('menu-btn');
     const closeBtn = document.getElementById('close-btn');
@@ -55,4 +56,60 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = "index.html";
         }
     });
+});
+// --- DARK/LIGHT MODE LOGIC ---
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Pehle check karo ki user ne aakhiri baar kya set kiya tha
+if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+    themeToggleBtn.innerText = '🌙'; // Light mode hai toh Moon dikhao
+}
+
+// 2. Button click hone par kya hoga
+themeToggleBtn.addEventListener('click', () => {
+    // Light mode class lagao ya hatao
+    body.classList.toggle('light-mode');
+    
+    // Icon change karo aur memory (localStorage) mein save karo
+    if (body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+        themeToggleBtn.innerText = '🌙'; 
+    } else {
+        localStorage.setItem('theme', 'dark');
+        themeToggleBtn.innerText = '☀️'; 
+    }
+});
+// ==========================================
+// 🎥 VLOG POPUP (MODAL) BULLETPROOF LOGIC
+// ==========================================
+
+// Ye 'DOMContentLoaded' ensure karega ki JS tabhi chale jab HTML poora load ho chuka ho
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const vlogBtn = document.getElementById('vlog-btn');
+    const videoModal = document.getElementById('video-modal');
+    const closeVideoBtn = document.getElementById('close-video-btn');
+
+    // Agar button aur modal mil gaye toh click event lagao
+    if (vlogBtn && videoModal) {
+        vlogBtn.addEventListener('click', () => {
+            videoModal.style.display = 'block'; // Popup dikhao
+        });
+    }
+
+    // X (Close) dabane ka logic
+    if (closeVideoBtn && videoModal) {
+        closeVideoBtn.addEventListener('click', () => {
+            videoModal.style.display = 'none'; // Popup chhupao
+            
+            // Video background music stop trick
+            const iframes = videoModal.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                let currentSrc = iframe.src;
+                iframe.src = currentSrc; 
+            });
+        });
+    }
 });
