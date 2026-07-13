@@ -113,8 +113,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-    // --- CHAT BUTTON LOGIC (CROSS-DOMAIN SSO) ---
+    // ==========================================
+// 💬 CHAT BUTTON LOGIC (CROSS-DOMAIN SSO)
+// ==========================================
+document.addEventListener("DOMContentLoaded", function() {
     const chatBtn = document.getElementById('chat-btn');
+    
     if (chatBtn) {
         chatBtn.addEventListener('click', async () => {
             // 1. Current user ka token nikalo
@@ -124,13 +128,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 const accessToken = data.session.access_token;
                 const refreshToken = data.session.refresh_token;
                 
-                // 2. Yahan apni CHAT WEBSITE ka asli Live Link dalo
+                // 2. Chat website ka Live Link
                 const chatWebsiteLink = "https://omnix-ui.github.io/omnix.chat/"; 
                 
-                // 3. Token ko URL mein jod kar dusri website par bhej do
+                // 3. User ko URL ke sath chat par bhej do
                 window.location.href = `${chatWebsiteLink}?access_token=${accessToken}&refresh_token=${refreshToken}`;
             } else {
                 alert("Pehle login kijiye!");
             }
         });
     }
+});
