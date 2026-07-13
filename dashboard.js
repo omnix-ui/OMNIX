@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-    // ==========================================
+// ==========================================
 // 💬 CHAT BUTTON LOGIC (CROSS-DOMAIN SSO)
 // ==========================================
 document.addEventListener("DOMContentLoaded", function() {
@@ -121,20 +121,36 @@ document.addEventListener("DOMContentLoaded", function() {
     
     if (chatBtn) {
         chatBtn.addEventListener('click', async () => {
-            // 1. Current user ka token nikalo
-            const { data, error } = await supabase.auth.getSession();
-            
-            if (data.session) {
-                const accessToken = data.session.access_token;
-                const refreshToken = data.session.refresh_token;
+            try {
+                // 1. SUPABASE KO YAHIN PAR ZINDA KARO (Taaki undefined na aaye)
+                const supabaseUrl = 'https://otbyobzvuomysphfgmym.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90YnlvYnp2dW9teXNwaGZnbXltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2Nzk5MTMsImV4cCI6MjA5OTI1NTkxM30.UKLCLo3TrlTNAVv2-dl_m8w8YdudALZO05_R5iEKd64';
                 
-                // 2. Chat website ka Live Link
-                const chatWebsiteLink = "https://omnix-ui.github.io/omnix.chat/"; 
+                const mySupabase = window.supabase.createClient(supabaseUrl, supabaseKey);
                 
-                // 3. User ko URL ke sath chat par bhej do
-                window.location.href = `${chatWebsiteLink}?access_token=${accessToken}&refresh_token=${refreshToken}`;
-            } else {
-                alert("Pehle login kijiye!");
+                // 2. Ab token nikalenge naye connection se
+                const { data, error } = await mySupabase.auth.getSession();
+                
+                if (error) {
+                    alert("Session nikalne mein error: " + error.message);
+                    return;
+                }
+                
+                if (data && data.session) {
+                    const accessToken = data.session.access_token;
+                    const refreshToken = data.session.refresh_token;
+                    
+                    // 3. Chat website ka Live Link
+                    const chatWebsiteLink = "https://omnix-ui.github.io/omnix.chat/"; 
+                    
+                    // 4. User ko URL ke sath chat par bhej do
+                    window.location.href = `${chatWebsiteLink}?access_token=${accessToken}&refresh_token=${refreshToken}`;
+                } else {
+                    // Agar memory me login data nahi mila
+                    alert("Bhai, pehle index.html se login karo, tabhi chat khulega!");
+                }
+            } catch (err) {
+                alert("Code yahan atak gaya: " + err.message);
             }
         });
     }
